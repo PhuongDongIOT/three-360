@@ -20,16 +20,24 @@ const geometries = [
 export function Geometries() {
   const n = 40
   const randProps = useMemo(() => Array.from({ length: n }, () => geometries[Math.floor(Math.random() * geometries.length)]), [])
-  return randProps.map((prop, index) => {
-    return (
-      <Float key={index}>
-        <mesh
-          scale={MathUtils.randFloat(0.25, 0.5)}
-          position={[MathUtils.randFloat(-8, 8), MathUtils.randFloat(-8, 8), MathUtils.randFloat(-8, 8)]}
-          geometry={prop.geometry}
-          material={material}
-        />
-      </Float>
-    )
-  })
+return randProps.map((prop, index) => {
+  const color = new THREE.Color(`hsl(${Math.random() * 360}, 80%, 60%)`)
+  const mat = new THREE.MeshStandardMaterial({ color })
+
+  return (
+    <Float key={index}>
+      <mesh
+        scale={MathUtils.randFloat(0.25, 0.5)}
+        position={[
+          MathUtils.randFloat(-8, 8),
+          MathUtils.randFloat(-8, 8),
+          MathUtils.randFloat(-8, 8),
+        ]}
+        geometry={prop.geometry}
+        material={mat}
+      />
+    </Float>
+  )
+})
+
 }

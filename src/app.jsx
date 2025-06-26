@@ -12,6 +12,9 @@ import MapComponent from './map-component.jsx'
 import SettingGrid from './setting-grid.jsx'
 import InfoCard from './info-card.jsx'
 import { SSAOEffect } from './SSAOScene.jsx'
+import { Suzi } from './suzi.jsx'
+import { useControls } from 'leva'
+import { Model } from './model.jsx'
 
 const images = [
     'https://picsum.photos/id/1011/800/400',
@@ -32,6 +35,8 @@ export function App() {
     const [isOpenInfo, setIsOpenInfo] = useState(false)
     const [currentImage, setCurrentImage] = useState('/assets/pano.jpg');
     const [list, setList] = useState(images)
+
+    const { outlines } = useControls({ outlines: true })
 
     const buttons = [
         { icon: 'home', label: 'Trang chủ', onClick: () => { } },
@@ -72,13 +77,15 @@ export function App() {
                     />
                     <hemisphereLight groundColor="red" />
                     <Geometries />
+
+                    {/* <SSAOEffect /> */}
+                    <Model outlines={outlines} scale={0.02} position={[-1.25, -1.5, 0]} rotation={[Math.PI / 2, 0, 0]} />
                     <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
                     <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
                     <Environment background preset="dawn" blur={0.8} />
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
 
                     <OrbitControls />
-                    <SSAOEffect />
 
                     {/* <Box position={[0, 0, 0]} /> */}
                 </Canvas>

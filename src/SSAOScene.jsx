@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { useGLTF, useTexture, Center, Decal, Text3D, OrbitControls } from '@react-three/drei'
+import { useGLTF, useTexture, Center, Decal, Text3D, OrbitControls, Backdrop } from '@react-three/drei'
 import { useRef } from 'react'
 
 export function SSAOEffect() {
@@ -35,6 +35,9 @@ export function SSAOEffect() {
         </Text3D> */}
         <Center position={[-1.25, 0, 0]}>
           <Chair position={[0, -0.5, 0]} rotation={[0, 0.5, 0]} />
+          {/* <Backdrop receiveShadow scale={[20, 5, 5]} floor={1.5} position={[0, -0.5, -2]}>
+            <meshPhysicalMaterial roughness={1} color="#efefef" />
+          </Backdrop> */}
         </Center>
       </Center>
     </>
