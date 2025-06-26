@@ -11,10 +11,8 @@ import CarouselWithEffect from './carousel.jsx'
 import MapComponent from './map-component.jsx'
 import SettingGrid from './setting-grid.jsx'
 import InfoCard from './info-card.jsx'
-import { SSAOEffect } from './SSAOScene.jsx'
-import { Suzi } from './suzi.jsx'
-import { useControls } from 'leva'
 import { Model } from './model.jsx'
+import { Scene } from './scene.jsx'
 
 const images = [
     'https://picsum.photos/id/1011/800/400',
@@ -36,8 +34,6 @@ export function App() {
     const [currentImage, setCurrentImage] = useState('/assets/pano.jpg');
     const [list, setList] = useState(images)
 
-    const { outlines } = useControls({ outlines: true })
-
     const buttons = [
         { icon: 'home', label: 'Trang chủ', onClick: () => { } },
         { icon: 'info', label: 'Thông tin', onClick: () => setIsOpenInfo(true) },
@@ -51,43 +47,44 @@ export function App() {
                 <Canvas shadows camera={{ position: [0, 0, 16], fov: 75 }}>
                     <ambientLight intensity={Math.PI / 2} />
                     <PanoramaWithTransition image={currentImage} />
-                    <Hotspot
-                        position={new Vector3(0, 0, -500)}
-                        label="🏠 Home"
-                        color="blue"
-                        onClick={() => setCurrentImage('/assets/pano2.jpg')}
-                    />
-                    <Hotspot
-                        position={new Vector3(100, 0, -500)}
-                        label="📷 Panorama"
-                        color="pink"
-                        onClick={() => setCurrentImage('/assets/pano.jpg')}
-                    />
-                    <Hotspot
-                        position={new Vector3(0, 100, -500)}
-                        label="📷 Gallery"
-                        color="pink"
-                        onClick={() => alert('Clicked Gallery')}
-                    />
-                    <Hotspot
-                        position={new Vector3(400, 0, -500)}
-                        label="📷 Gallery"
-                        color="pink"
-                        onClick={() => alert('Clicked Gallery')}
-                    />
-                    <hemisphereLight groundColor="red" />
-                    <Geometries />
-
+                    <group>
+                        <Hotspot
+                            position={new Vector3(0, 0, -500)}
+                            label="🏠 Home"
+                            color="blue"
+                            onClick={() => setCurrentImage('/assets/pano2.jpg')}
+                        />
+                        <Hotspot
+                            position={new Vector3(100, 0, -500)}
+                            label="📷 Panorama"
+                            color="pink"
+                            onClick={() => setCurrentImage('/assets/pano.jpg')}
+                        />
+                        <Hotspot
+                            position={new Vector3(0, 100, -500)}
+                            label="📷 Gallery"
+                            color="pink"
+                            onClick={() => alert('Clicked Gallery')}
+                        />
+                        <Hotspot
+                            position={new Vector3(400, 0, -500)}
+                            label="📷 Gallery"
+                            color="pink"
+                            onClick={() => alert('Clicked Gallery')}
+                        />
+                    </group>
+                    <group>
+                        <hemisphereLight groundColor="red" />
+                        <Geometries />
+                    </group>
                     {/* <SSAOEffect /> */}
-                    <Model outlines={outlines} scale={0.02} position={[-1.25, -1.5, 0]} rotation={[Math.PI / 2, 0, 0]} />
-                    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-                    <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-                    <Environment background preset="dawn" blur={0.8} />
+                    <group>
+                        <Scene scale={0.02} position={[-1.25, -1.5, 0]} rotation={[Math.PI / 2, 0, 0]} />
+                        <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
+                        <Environment background preset="dawn" blur={0.8} />
+                    </group>
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
-
                     <OrbitControls />
-
-                    {/* <Box position={[0, 0, 0]} /> */}
                 </Canvas>
             </div>
             <div className='fixed bottom-0 left-0 w-full'>
