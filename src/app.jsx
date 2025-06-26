@@ -13,6 +13,7 @@ import SettingGrid from './setting-grid.jsx'
 import InfoCard from './info-card.jsx'
 import { Model } from './model.jsx'
 import { Scene } from './scene.jsx'
+import { Video } from './video.jsx'
 
 const images = [
     'https://picsum.photos/id/1011/800/400',
@@ -83,6 +84,7 @@ export function App() {
                         <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
                         <Environment background preset="dawn" blur={0.8} />
                     </group>
+                    <Video />
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
                     <OrbitControls />
                 </Canvas>
