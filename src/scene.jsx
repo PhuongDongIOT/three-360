@@ -128,7 +128,7 @@ export function Scene({ ...props }) {
                         </skinnedMesh>
                     </group>
                 </Center>
-                <Ground />
+                {/* <Ground /> */}
                 <Shadows />
                 <CameraControls
                     ref={cameraControlsRef}
