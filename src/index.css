@@ -1,0 +1,23 @@
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: unset;
+}
+
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  transition: transform 0.6s ease; /* tạo hiệu ứng mượt */
+}
+
+.embla__slide {
+  position: relative;
+  min-width: 100%;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
