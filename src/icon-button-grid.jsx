@@ -17,10 +17,10 @@ export default function IconButtonGrid({ buttons = [] }) {
           <button
             key={index}
             onClick={btn.onClick}
-            className="border border-dotted border-cyan-300 flex flex-col w-full gap-2 items-center justify-center p-2 lg:p-4 bg-blue-600/40 shadow-inner rounded hover:bg-blue-600/80 transition"
+            className="border border-dotted border-cyan-300 flex flex-col w-full gap-2 items-center justify-center p-2 lg:p-4 bg-blue-600/20 shadow-inner rounded hover:bg-blue-600/80 transition"
           >
             <Icon className="w-6 h-6 text-white" />
-            <span className="font-medium text-white text-xs lg:text-sm">{btn.label}</span>
+            <span className="font-bold text-white text-xs lg:text-sm">{btn.label}</span>
           </button>
         )
       })}

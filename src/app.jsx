@@ -11,6 +11,7 @@ import CarouselWithEffect from './carousel.jsx'
 import MapComponent from './map-component.jsx'
 import SettingGrid from './setting-grid.jsx'
 import InfoCard from './info-card.jsx'
+import { SSAOEffect } from './SSAOScene.jsx'
 
 const images = [
     'https://picsum.photos/id/1011/800/400',
@@ -23,7 +24,6 @@ const images_another = [
     'https://picsum.photos/id/1011/800/400',
     'https://picsum.photos/id/1012/800/400',
 ]
-
 
 export function App() {
     const [isOpen, setIsOpen] = useState(false)
@@ -43,7 +43,7 @@ export function App() {
     return (
         <div className='relative h-screen w-screen'>
             <div className='h-screen w-screen'>
-                <Canvas camera={{ position: [0, 0, 22.5], fov: 75 }}>
+                <Canvas shadows camera={{ position: [0, 0, 16], fov: 75 }}>
                     <ambientLight intensity={Math.PI / 2} />
                     <PanoramaWithTransition image={currentImage} />
                     <Hotspot
@@ -77,10 +77,10 @@ export function App() {
                     <Environment background preset="dawn" blur={0.8} />
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
 
+                    <OrbitControls />
+                    <SSAOEffect />
 
                     {/* <Box position={[0, 0, 0]} /> */}
-
-                    <OrbitControls />
                 </Canvas>
             </div>
             <div className='fixed bottom-0 left-0 w-full'>
