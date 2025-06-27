@@ -17,6 +17,7 @@ import { BackgroundAudio } from './background-audio.jsx'
 import { CloudScene } from './sky.jsx'
 import * as THREE from 'three'
 import { GroundImage } from './ground-image.jsx'
+import { soundButton } from './sound-button.jsx'
 
 const images = [
     '/1.jpg',
@@ -39,9 +40,8 @@ export function App() {
     const [list, setList] = useState(images)
     const controls = useRef()
 
+    const { playSound } = soundButton({url: '/click.wav'})
     const handleClick = (e) => {
-        console.log(e);
-
         const position = e.object.position
         controls.current?.fitToBox(e.object, true) // Tự động xoay + zoom đến object
         // Hoặc dùng setLookAt
@@ -49,11 +49,23 @@ export function App() {
     }
 
     const buttons = [
-        { icon: 'home', label: 'Trang chủ', onClick: () => { } },
-        { icon: 'info', label: 'Thông tin', onClick: () => setIsOpenInfo(true) },
-        { icon: 'map', label: 'Bản đồ', onClick: () => setIsOpenMap(true) },
-        { icon: 'camera', label: 'Hình ảnh', onClick: () => setIsOpen(true) },
-        { icon: 'arrow', label: 'Cài đặt', onClick: () => setIsOpenSetting(true) },
+        { icon: 'home', label: 'Trang chủ', onClick: () => {playSound(); } },
+        { icon: 'info', label: 'Thông tin', onClick: () => {
+            playSound();
+            setIsOpenInfo(true);
+        } },
+        { icon: 'map', label: 'Bản đồ', onClick: () => {
+            playSound();
+            setIsOpenMap(true);
+        } },
+        { icon: 'camera', label: 'Hình ảnh', onClick: () => {
+            playSound();
+            setIsOpen(true);
+        } },
+        { icon: 'arrow', label: 'Cài đặt', onClick: () => {
+            playSound();
+            setIsOpenSetting(true);
+        } },
     ]
 
 
