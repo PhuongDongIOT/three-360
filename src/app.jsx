@@ -1,9 +1,9 @@
 import { Canvas } from '@react-three/fiber'
-import { AdaptiveDpr, CameraControls, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
+import { AdaptiveDpr, AdaptiveEvents, CameraControls, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
 import { Hotspot } from './hotspot.jsx'
 import { Geometries } from './geometries.jsx'
 import { Vector3 } from 'three'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import PanoramaWithTransition from './panorama-with-transition.jsx'
 import IconButtonGrid from './icon-button-grid.jsx'
 import Modal from './modal.jsx'
@@ -35,6 +35,16 @@ export function App() {
     const [isOpenInfo, setIsOpenInfo] = useState(false)
     const [currentImage, setCurrentImage] = useState('/assets/pano.jpg');
     const [list, setList] = useState(images)
+    const controls = useRef()
+
+    const handleClick = (e) => {
+        const position = e.object.position
+        controls.current?.fitToBox(e.object, true) // Tự động xoay + zoom đến object
+        console.log(e);
+
+        // Hoặc dùng setLookAt
+        // controls.current.setLookAt(0, 5, 10, position.x, position.y, position.z, true)
+    }
 
     const buttons = [
         { icon: 'home', label: 'Trang chủ', onClick: () => { } },
@@ -44,11 +54,13 @@ export function App() {
         { icon: 'arrow', label: 'Cài đặt', onClick: () => setIsOpenSetting(true) },
     ]
 
+
     return (
         <div className='relative h-screen w-screen overflow-hidden'>
             <div className='h-screen w-screen overflow-hidden'>
                 <Canvas shadows camera={{ position: [0, 0, 16], fov: 75 }}>
                     <AdaptiveDpr pixelated />
+                    <AdaptiveEvents />
                     <ambientLight intensity={Math.PI / 2} />
                     <PanoramaWithTransition image={currentImage} />
                     <group>
@@ -82,14 +94,14 @@ export function App() {
                         <Geometries />
                     </group>
                     <group>
-                        <Scene scale={0.02} position={[-1.25, -1.5, 0]} rotation={[Math.PI / 2, 0, 0]} />
+                        <Scene handleClick={handleClick} scale={0.02} position={[-1.25, -1.5, 0]} rotation={[Math.PI / 2, 0, 0]} />
                         <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
                         <Environment background preset="dawn" blur={0.8} />
                     </group>
                     <SceneVideo />
                     <CloudScene />
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
-                    <CameraControls />
+                    <CameraControls ref={controls} minDistance={5} maxDistance={500} />
                     <OrbitControls />
                     <BackgroundAudio url="/music.mp3" />
                 </Canvas>

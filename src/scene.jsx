@@ -121,7 +121,7 @@ export function Scene({ ...props }) {
         <>
             <group position-y={-0.5}>
                 <Center top>
-                    <group {...props} ref={meshRef}>
+                    <group {...props} ref={meshRef} onClick={props.handleClick}>
                         <primitive object={nodes.mixamorigHips}></primitive>
                         <Backdrop
                             floor={0.25} // Stretches the floor segment, 0.25 by default
@@ -135,14 +135,6 @@ export function Scene({ ...props }) {
                 </Center>
                 {/* <Ground /> */}
                 <Shadows />
-                {/* <CameraControls
-                    ref={cameraControlsRef}
-                    minDistance={0}
-                    enabled={true}
-                    verticalDragToForward={{ value: false, label: 'vert. drag to move forward' }}
-                    dollyToCursor={{ value: false, label: 'infinity dolly' }}
-                    infinityDolly={{ value: false, label: 'infinity dolly' }}
-                /> */}
                 <Environment files={suspend(city).default} />
             </group>
         </>
