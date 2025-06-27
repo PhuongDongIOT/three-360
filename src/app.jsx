@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import { ContactShadows, Environment, OrbitControls } from '@react-three/drei'
+import { CameraControls, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
 import { Hotspot } from './hotspot.jsx'
 import { Geometries } from './geometries.jsx'
 import { Vector3 } from 'three'
@@ -87,6 +87,7 @@ export function App() {
                     </group>
                     <SceneVideo />
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
+                    <CameraControls />
                     <OrbitControls />
                     <BackgroundAudio url="/music.mp3" />
                 </Canvas>
