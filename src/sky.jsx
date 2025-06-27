@@ -44,11 +44,11 @@ function Sky() {
             <group ref={ref}>
                 <Clouds material={THREE.MeshLambertMaterial} limit={100} range={range}>
                     <Cloud ref={cloud0} {...config} bounds={[x, y, z]} color={color} />
-                    <Cloud {...config} bounds={[x, y, z]} color="#eed0d0" seed={2} position={[15, 0, 0]} />
+                    {/* <Cloud {...config} bounds={[x, y, z]} color="#eed0d0" seed={2} position={[15, 0, 0]} />
                     <Cloud {...config} bounds={[x, y, z]} color="#d0e0d0" seed={3} position={[-15, 0, 0]} />
                     <Cloud {...config} bounds={[x, y, z]} color="#a0b0d0" seed={4} position={[0, 0, -12]} />
-                    <Cloud {...config} bounds={[x, y, z]} color="#c0c0dd" seed={5} position={[0, 0, 12]} />
-                    <Cloud concentrate="outside" growth={4} color="#ffccdd" opacity={1.25} seed={0.3} bounds={200} volume={200} />
+                    <Cloud {...config} bounds={[x, y, z]} color="#c0c0dd" seed={5} position={[0, 0, 12]} /> */}
+                    <Cloud concentrate="inside" growth={2} color="#ffccdd" opacity={1} seed={0.3} bounds={200} volume={150} />
                 </Clouds>
             </group>
         </>
