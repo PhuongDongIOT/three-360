@@ -20,7 +20,7 @@ export function CloudScene() {
 function Sky() {
     const ref = useRef()
     const cloud0 = useRef()
-    const { color, x, y, z, range, ...config } = useControls({
+    const { color, x, y, z, range, ...config } = {
         seed: { value: 40, min: 1, max: 100, step: 1 },
         segments: { value: 10, min: 1, max: 80, step: 1 },
         volume: { value: 10, min: 0, max: 100, step: 0.1 },
@@ -32,7 +32,7 @@ function Sky() {
         y: { value: 100, min: 0, max: 100, step: 1 },
         z: { value: 80, min: 0, max: 100, step: 1 },
         color: "white",
-    })
+    }
     useFrame((state, delta) => {
         ref.current.rotation.y = Math.cos(state.clock.elapsedTime / 2) / 2
         ref.current.rotation.x = Math.sin(state.clock.elapsedTime / 2) / 2

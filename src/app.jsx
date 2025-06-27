@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber'
-import { AdaptiveDpr, AdaptiveEvents, CameraControls, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
+import { AdaptiveDpr, AdaptiveEvents, CameraControls, ContactShadows, useTexture } from '@react-three/drei'
+import { Bloom, EffectComposer, SMAA, Vignette, LensFlare } from '@react-three/postprocessing'
 import { Hotspot } from './hotspot.jsx'
 import { Geometries } from './geometries.jsx'
 import { Vector3 } from 'three'
@@ -18,6 +19,10 @@ import { CloudScene } from './sky.jsx'
 import * as THREE from 'three'
 import { GroundImage } from './ground-image.jsx'
 import { soundButton } from './sound-button.jsx'
+import { folder, useControls } from 'leva'
+import SkyBox from './sky-box.jsx'
+import GlassSphere from './sphere-glass-materialtest.jsx'
+import GalleryWithPreview from './gallery-with-preview.jsx'
 
 const images = [
     '/1.jpg',
@@ -40,7 +45,7 @@ export function App() {
     const [list, setList] = useState(images)
     const controls = useRef()
 
-    const { playSound } = soundButton({url: '/click.wav'})
+    const { playSound } = soundButton({ url: '/click.wav' })
     const handleClick = (e) => {
         const position = e.object.position
         controls.current?.fitToBox(e.object, true) // Tự động xoay + zoom đến object
@@ -49,23 +54,31 @@ export function App() {
     }
 
     const buttons = [
-        { icon: 'home', label: 'Trang chủ', onClick: () => {playSound(); } },
-        { icon: 'info', label: 'Thông tin', onClick: () => {
-            playSound();
-            setIsOpenInfo(true);
-        } },
-        { icon: 'map', label: 'Bản đồ', onClick: () => {
-            playSound();
-            setIsOpenMap(true);
-        } },
-        { icon: 'camera', label: 'Hình ảnh', onClick: () => {
-            playSound();
-            setIsOpen(true);
-        } },
-        { icon: 'arrow', label: 'Cài đặt', onClick: () => {
-            playSound();
-            setIsOpenSetting(true);
-        } },
+        { icon: 'home', label: 'Trang chủ', onClick: () => { playSound(); } },
+        {
+            icon: 'info', label: 'Thông tin', onClick: () => {
+                playSound();
+                setIsOpenInfo(true);
+            }
+        },
+        {
+            icon: 'map', label: 'Bản đồ', onClick: () => {
+                playSound();
+                setIsOpenMap(true);
+            }
+        },
+        {
+            icon: 'camera', label: 'Hình ảnh', onClick: () => {
+                playSound();
+                setIsOpen(true);
+            }
+        },
+        {
+            icon: 'arrow', label: 'Cài đặt', onClick: () => {
+                playSound();
+                setIsOpenSetting(true);
+            }
+        },
     ]
 
 
@@ -76,6 +89,13 @@ export function App() {
                     <AdaptiveDpr pixelated />
                     <AdaptiveEvents />
                     <ambientLight intensity={Math.PI / 2} />
+                    <directionalLight
+                        position={[10, 10, 5]}
+                        intensity={1.5}
+                        castShadow
+                        shadow-mapSize-width={1024}
+                        shadow-mapSize-height={1024}
+                    />
                     <PanoramaWithTransition image={currentImage} />
                     <group>
                         <Hotspot
@@ -135,8 +155,16 @@ export function App() {
                     <SceneVideo />
                     <CloudScene />
                     <GroundImage />
+                    {/* <EffectComposer multisampling={false}>
+                        <DirtLensFlare />
+                        <Vignette />
+                        <Bloom mipmapBlur radius="0.9" luminanceThreshold="0.966" intensity="2" levels="4" />
+                        <SMAA />
+                    </EffectComposer> */}
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
                     <CameraControls ref={controls} minDistance={5} maxDistance={500} />
+                    {/* <GlassSphere scale={1} /> */}
+                    <SkyBox />
                     <BackgroundAudio url='/music.mp3' />
                 </Canvas>
             </div>
@@ -152,42 +180,55 @@ export function App() {
                 <SettingGrid />
             </Modal>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <div className='grid grid-cols-4'>
-                    <div className='flex flex-col gap-2'>
-                        <div className='h-24 w-full'>
-                            <img
-                                src='/7.jpg'
-                                className='w-auto h-full object-cover rounded-xl'
-                                onClick={() => setList(images_another)}
-                            />
-                        </div>
-                        <div className='h-24 w-full'>
-                            <img
-                                src='/8.jpg'
-                                className='w-auto h-full object-cover rounded-xl'
-                            />
-                        </div>
-                        <div className='h-24 w-full'>
-                            <img
-                                src='/9.jpg'
-                                className='w-auto h-full object-cover rounded-xl'
-                            />
-                        </div>
-                        <div className='h-24 w-full'>
-                            <img
-                                src='/10.jpg'
-                                className='w-auto h-full object-cover rounded-xl'
-                            />
-                        </div>
-                    </div>
-                    <div className='col-span-3'>
-                        <CarouselWithEffect images={list} />
-                    </div>
-                </div>
+                <GalleryWithPreview
+                    list={list}
+                    setList={setList}
+                    imagesAnother={images_another}
+                />
             </Modal>
             <Modal isOpen={isOpenMap} onClose={() => setIsOpenMap(false)}>
                 <MapComponent />
             </Modal>
         </div>
     )
+}
+
+function DirtLensFlare(props) {
+    const texture = useTexture('/lensDirtTexture.png')
+
+    const lensFlareProps = useControls({
+        LensFlare: folder(
+            {
+                enabled: { value: true, label: 'enabled?' },
+                opacity: { value: 1.0, min: 0.0, max: 1.0, label: 'opacity' },
+                position: { value: { x: -25, y: 6, z: -60 }, step: 1, label: 'position' },
+                glareSize: { value: 0.35, min: 0.01, max: 1.0, label: 'glareSize' },
+                starPoints: { value: 6.0, step: 1.0, min: 0, max: 32.0, label: 'starPoints' },
+                animated: { value: true, label: 'animated?' },
+                followMouse: { value: false, label: 'followMouse?' },
+                anamorphic: { value: false, label: 'anamorphic?' },
+                colorGain: { value: new THREE.Color(56, 22, 11), label: 'colorGain' },
+
+                Flare: folder({
+                    flareSpeed: { value: 0.4, step: 0.001, min: 0.0, max: 1.0, label: 'flareSpeed' },
+                    flareShape: { value: 0.1, step: 0.001, min: 0.0, max: 1.0, label: 'flareShape' },
+                    flareSize: { value: 0.005, step: 0.001, min: 0.0, max: 0.01, label: 'flareSize' }
+                }),
+
+                SecondaryGhosts: folder({
+                    secondaryGhosts: { value: true, label: 'secondaryGhosts?' },
+                    ghostScale: { value: 0.1, min: 0.01, max: 1.0, label: 'ghostScale' },
+                    aditionalStreaks: { value: true, label: 'aditionalStreaks?' }
+                }),
+
+                StartBurst: folder({
+                    starBurst: { value: true, label: 'starBurst?' },
+                    haloScale: { value: 0.5, step: 0.01, min: 0.3, max: 1.0 }
+                })
+            },
+            { collapsed: true }
+        )
+    })
+
+    return <LensFlare {...lensFlareProps} lensDirtTexture={texture} />
 }
