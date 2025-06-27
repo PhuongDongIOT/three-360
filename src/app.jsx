@@ -15,6 +15,8 @@ import { Scene } from './scene.jsx'
 import SceneVideo from './scene-video.jsx'
 import { BackgroundAudio } from './background-audio.jsx'
 import { CloudScene } from './sky.jsx'
+import * as THREE from 'three'
+import { GroundImage } from './ground-image.jsx'
 
 const images = [
     '/1.jpg',
@@ -38,10 +40,10 @@ export function App() {
     const controls = useRef()
 
     const handleClick = (e) => {
-        const position = e.object.position
-        controls.current?.fitToBox(e.object, true) // Tự động xoay + zoom đến object
         console.log(e);
 
+        const position = e.object.position
+        controls.current?.fitToBox(e.object, true) // Tự động xoay + zoom đến object
         // Hoặc dùng setLookAt
         // controls.current.setLookAt(0, 5, 10, position.x, position.y, position.z, true)
     }
@@ -66,44 +68,64 @@ export function App() {
                     <group>
                         <Hotspot
                             position={new Vector3(0, 0, -500)}
-                            label="🏠 Home"
-                            color="blue"
-                            onClick={() => setCurrentImage('/assets/pano2.jpg')}
+                            label='🏠 Home'
+                            color='blue'
+                            onClick={() => {
+                                controls.current?.setLookAt(
+                                    0, 0, -300,    // Đặt camera ở đây
+                                    0, 0, -500,       // Nhìn về origin hoặc object nào đó
+                                    true
+                                );
+                                setTimeout(() => {
+                                    setCurrentImage('/assets/pano2.jpg');
+                                    setTimeout(() => {
+                                        controls.current?.setLookAt(
+                                            0, 0, 16,
+                                            0, 0, 0,
+                                            true
+                                        );
+                                    }, 500)
+                                }, 200)
+                            }}
                         />
                         <Hotspot
                             position={new Vector3(100, 0, -500)}
-                            label="📷 Panorama"
-                            color="pink"
-                            onClick={() => setCurrentImage('/assets/pano.jpg')}
-                        />
-                        <Hotspot
-                            position={new Vector3(0, 100, -500)}
-                            label="📷 Gallery"
-                            color="pink"
-                            onClick={() => alert('Clicked Gallery')}
-                        />
-                        <Hotspot
-                            position={new Vector3(400, 0, -500)}
-                            label="📷 Gallery"
-                            color="pink"
-                            onClick={() => alert('Clicked Gallery')}
+                            label='📷 Panorama'
+                            color='pink'
+                            onClick={() => {
+                                controls.current?.setLookAt(
+                                    0, 0, -300,    // Đặt camera ở đây
+                                    0, 0, -500,       // Nhìn về origin hoặc object nào đó
+                                    true
+                                );
+                                setTimeout(() => {
+                                    setCurrentImage('/assets/pano.jpg');
+                                    setTimeout(() => {
+                                        controls.current?.setLookAt(
+                                            0, 0, 16,
+                                            0, 0, 0,
+                                            true
+                                        );
+                                    }, 500)
+                                }, 200)
+                            }}
                         />
                     </group>
                     <group>
-                        <hemisphereLight groundColor="red" />
+                        <hemisphereLight groundColor='red' />
                         <Geometries />
                     </group>
                     <group>
                         <Scene handleClick={handleClick} scale={0.02} position={[-1.25, -1.5, 0]} rotation={[Math.PI / 2, 0, 0]} />
                         <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-                        <Environment background preset="dawn" blur={0.8} />
+                        {/* <Environment background preset='dawn' blur={0.8} /> */}
                     </group>
                     <SceneVideo />
                     <CloudScene />
+                    <GroundImage />
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
                     <CameraControls ref={controls} minDistance={5} maxDistance={500} />
-                    <OrbitControls />
-                    <BackgroundAudio url="/music.mp3" />
+                    <BackgroundAudio url='/music.mp3' />
                 </Canvas>
             </div>
             <div className='fixed bottom-0 left-0 w-full'>
@@ -123,26 +145,26 @@ export function App() {
                         <div className='h-24 w-full'>
                             <img
                                 src='/7.jpg'
-                                className="w-auto h-full object-cover rounded-xl"
+                                className='w-auto h-full object-cover rounded-xl'
                                 onClick={() => setList(images_another)}
                             />
                         </div>
                         <div className='h-24 w-full'>
                             <img
                                 src='/8.jpg'
-                                className="w-auto h-full object-cover rounded-xl"
+                                className='w-auto h-full object-cover rounded-xl'
                             />
                         </div>
                         <div className='h-24 w-full'>
                             <img
                                 src='/9.jpg'
-                                className="w-auto h-full object-cover rounded-xl"
+                                className='w-auto h-full object-cover rounded-xl'
                             />
                         </div>
                         <div className='h-24 w-full'>
                             <img
                                 src='/10.jpg'
-                                className="w-auto h-full object-cover rounded-xl"
+                                className='w-auto h-full object-cover rounded-xl'
                             />
                         </div>
                     </div>

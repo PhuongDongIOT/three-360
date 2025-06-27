@@ -134,7 +134,7 @@ export function Scene({ ...props }) {
                     </group>
                 </Center>
                 {/* <Ground /> */}
-                <Shadows />
+                {/* <Shadows /> */}
                 <Environment files={suspend(city).default} />
             </group>
         </>
