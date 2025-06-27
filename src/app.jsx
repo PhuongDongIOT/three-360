@@ -11,22 +11,21 @@ import CarouselWithEffect from './carousel.jsx'
 import MapComponent from './map-component.jsx'
 import SettingGrid from './setting-grid.jsx'
 import InfoCard from './info-card.jsx'
-import { Model } from './model.jsx'
 import { Scene } from './scene.jsx'
-import { Video } from './video.jsx'
 import SceneVideo from './scene-video.jsx'
 import { BackgroundAudio } from './background-audio.jsx'
+import { CloudScene} from './sky.jsx'
 
 const images = [
-    'https://picsum.photos/id/1011/800/400',
-    'https://picsum.photos/id/1012/800/400',
-    'https://picsum.photos/id/1013/800/400',
+    '/1.jpg',
+    '/2.jpg',
+    '/3.jpg',
 ]
 
 const images_another = [
-    'https://picsum.photos/id/1013/800/400',
-    'https://picsum.photos/id/1011/800/400',
-    'https://picsum.photos/id/1012/800/400',
+    '/4.jpg',
+    '/5.jpg',
+    '/6.jpg',
 ]
 
 export function App() {
@@ -45,8 +44,8 @@ export function App() {
         { icon: 'arrow', label: 'Cài đặt', onClick: () => setIsOpenSetting(true) },
     ]
     return (
-        <div className='relative h-screen w-screen'>
-            <div className='h-screen w-screen'>
+        <div className='relative h-screen w-screen overflow-hidden'>
+            <div className='h-screen w-screen overflow-hidden'>
                 <Canvas shadows camera={{ position: [0, 0, 16], fov: 75 }}>
                     <ambientLight intensity={Math.PI / 2} />
                     <PanoramaWithTransition image={currentImage} />
@@ -86,6 +85,7 @@ export function App() {
                         <Environment background preset="dawn" blur={0.8} />
                     </group>
                     <SceneVideo />
+                    <CloudScene />
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
                     <CameraControls />
                     <OrbitControls />
@@ -108,26 +108,26 @@ export function App() {
                     <div className='flex flex-col gap-2'>
                         <div className='h-24 w-full'>
                             <img
-                                src='https://picsum.photos/id/1011/800/400'
+                                src='/7.jpg'
                                 className="w-auto h-full object-cover rounded-xl"
                                 onClick={() => setList(images_another)}
                             />
                         </div>
                         <div className='h-24 w-full'>
                             <img
-                                src='https://picsum.photos/id/1011/800/400'
+                                src='/8.jpg'
                                 className="w-auto h-full object-cover rounded-xl"
                             />
                         </div>
                         <div className='h-24 w-full'>
                             <img
-                                src='https://picsum.photos/id/1011/800/400'
+                                src='/9.jpg'
                                 className="w-auto h-full object-cover rounded-xl"
                             />
                         </div>
                         <div className='h-24 w-full'>
                             <img
-                                src='https://picsum.photos/id/1011/800/400'
+                                src='/10.jpg'
                                 className="w-auto h-full object-cover rounded-xl"
                             />
                         </div>

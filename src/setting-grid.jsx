@@ -13,7 +13,7 @@ export default function SettingGrid() {
       {settings.map((item, index) => (
         <div
           key={index}
-          className="bg-white shadow-md rounded-2xl p-4 flex items-start gap-4 hover:shadow-lg transition-all border border-gray-200"
+          className="shadow-inner bg-white/80 rounded-2xl p-4 flex items-start gap-4 hover:shadow-lg transition-all"
         >
           <div className="text-cyan-500">{item.icon}</div>
           <div>
