@@ -22,7 +22,7 @@ function Sky() {
     const cloud0 = useRef()
     const { color, x, y, z, range, ...config } = useControls({
         seed: { value: 40, min: 1, max: 100, step: 1 },
-        segments: { value: 20, min: 1, max: 80, step: 1 },
+        segments: { value: 10, min: 1, max: 80, step: 1 },
         volume: { value: 10, min: 0, max: 100, step: 0.1 },
         opacity: { value: 0.8, min: 0, max: 1, step: 0.01 },
         fade: { value: 215, min: 0, max: 400, step: 1 },
@@ -48,7 +48,7 @@ function Sky() {
                     <Cloud {...config} bounds={[x, y, z]} color="#d0e0d0" seed={3} position={[-15, 0, 0]} />
                     <Cloud {...config} bounds={[x, y, z]} color="#a0b0d0" seed={4} position={[0, 0, -12]} />
                     <Cloud {...config} bounds={[x, y, z]} color="#c0c0dd" seed={5} position={[0, 0, 12]} />
-                    {/* <Cloud concentrate="outside" growth={4} color="#ffccdd" opacity={1.25} seed={0.3} bounds={200} volume={200} /> */}
+                    <Cloud concentrate="outside" growth={4} color="#ffccdd" opacity={1.25} seed={0.3} bounds={200} volume={200} />
                 </Clouds>
             </group>
         </>

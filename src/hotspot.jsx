@@ -15,19 +15,17 @@ export function Hotspot({ position, label = '🔥 Info', onClick, color = 'red' 
 
   return (
     <>
-      {/* Sphere nhỏ làm marker 3D */}
       <mesh position={position}>
         <sphereGeometry args={[5, 16, 16]} />
         <meshStandardMaterial color="cyan" />
       </mesh>
 
-      {/* HTML button floating */}
       <Html position={position} center distanceFactor={600}>
         <button
-          className={`relative px-4 py-2 bg-white border rounded-md cursor-pointer shadow-md font-semibold transition glow-button ${classes}`}
+          className={`relative z-0 px-4 py-2 cursor-pointer font-semibold ${classes}`}
           onClick={onClick}
         >
-          {label}
+          <span className='glow-animated transition'>{label}</span>
         </button>
       </Html>
     </>

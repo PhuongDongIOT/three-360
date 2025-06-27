@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import { CameraControls, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
+import { AdaptiveDpr, CameraControls, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
 import { Hotspot } from './hotspot.jsx'
 import { Geometries } from './geometries.jsx'
 import { Vector3 } from 'three'
@@ -14,7 +14,7 @@ import InfoCard from './info-card.jsx'
 import { Scene } from './scene.jsx'
 import SceneVideo from './scene-video.jsx'
 import { BackgroundAudio } from './background-audio.jsx'
-import { CloudScene} from './sky.jsx'
+import { CloudScene } from './sky.jsx'
 
 const images = [
     '/1.jpg',
@@ -43,10 +43,12 @@ export function App() {
         { icon: 'camera', label: 'Hình ảnh', onClick: () => setIsOpen(true) },
         { icon: 'arrow', label: 'Cài đặt', onClick: () => setIsOpenSetting(true) },
     ]
+
     return (
         <div className='relative h-screen w-screen overflow-hidden'>
             <div className='h-screen w-screen overflow-hidden'>
                 <Canvas shadows camera={{ position: [0, 0, 16], fov: 75 }}>
+                    <AdaptiveDpr pixelated />
                     <ambientLight intensity={Math.PI / 2} />
                     <PanoramaWithTransition image={currentImage} />
                     <group>

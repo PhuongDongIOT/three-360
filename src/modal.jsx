@@ -30,7 +30,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         >
             <div
                 ref={modalRef}
-                className="rounded-xl w-full max-w-4xl shadow-lg px-8 lg:px-0 py-8 lg:py-0 overflow-hidden"
+                className="rounded-xl w-full max-w-4xl shadow-lg px-4 lg:px-0 py-4 lg:py-0 overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
             >
                 {children}
