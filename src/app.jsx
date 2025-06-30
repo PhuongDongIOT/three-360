@@ -32,6 +32,7 @@ import { suspend } from 'suspend-react'
 import IconButtonCol from './icon-button-col.jsx'
 import VerticalEmblaCarousel from './vertical-embla-carousel.jsx'
 import HorizontalEmblaCarousel from './horizontal-embla-carousel.jsx'
+import VRScene from './vr-scene.jsx'
 
 const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 const context = createContext()
@@ -56,6 +57,7 @@ export function App() {
     const [isOpenInfo, setIsOpenInfo] = useState(false)
     const [isOpenCarousel, setIsOpenCarousel] = useState(false)
     const [isOpenCarouselCus, setIsOpenCarouselCus] = useState(false)
+    const [isOpenVr, setIsOpenVr] = useState(false)
     const [currentImage, setCurrentImage] = useState('/assets/pano.jpg');
     const [list, setList] = useState(images)
     const controls = useRef()
@@ -117,16 +119,16 @@ export function App() {
             }
         },
         {
-            icon: 'arrow', label: 'Cài đặt', onClick: () => {
+            icon: 'arrow', label: 'VR', onClick: () => {
                 playSound();
-                setIsOpenSetting(true);
+                setIsOpenVr(true);
             }
         },
     ]
 
 
 
-    return (
+    return !isOpenVr ? (
         <div className='relative h-screen w-screen overflow-hidden'>
             <div className='h-screen w-screen overflow-hidden'>
                 <Canvas>
@@ -221,17 +223,17 @@ export function App() {
                 </div>
             </div>
             <Modal isOpen={isOpenCarouselCus} onClose={() => setIsOpenCarouselCus(false)}>
-                <div className='grid grid-cols-5 max-w-6xl h-[500px]'>
+                <div className='grid grid-cols-5 max-w-6xl h-[500px] gap-2 l:gap-4'>
                     <div className='col-span-1 flex flex-col gap-2'>
                         {images.map((item, index) => {
                             return (
                                 <div className='h-24 w-full'>
                                     <img
-                                    src={item}
-                                    alt={`Slide ${index}`}
-                                    className="w-full h-full object-cover rounded-xl"
-                                />
-                                    </div>
+                                        src={item}
+                                        alt={`Slide ${index}`}
+                                        className="w-full h-full object-cover rounded-xl"
+                                    />
+                                </div>
                             )
                         })}
                     </div>
@@ -269,7 +271,12 @@ export function App() {
             <AudioPlayerWithPlaylist />
             {/* <BackgroundAudio src='/music.mp3' /> */}
         </div>
-    )
+    ) :
+        (
+            <div className="h-screen w-screen">
+                <VRScene />
+            </div>
+        )
 }
 
 
