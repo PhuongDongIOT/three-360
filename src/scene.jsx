@@ -156,20 +156,3 @@ function Ground() {
     }
     return <Grid position={[0, -0.01, 0]} args={[10.5, 10.5]} {...gridConfig} />
 }
-
-const Shadows = memo(() => (
-    <AccumulativeShadows temporal frames={100} color="#9d4b4b" colorBlend={0.5} alphaTest={0.9} scale={20}>
-        <RandomizedLight amount={8} radius={4} position={[5, 5, -10]} />
-    </AccumulativeShadows>
-))
-
-const Suzi = forwardRef((props, ref) => {
-    const { nodes } = useGLTF(suspend(suzi).default)
-    return (
-        <>
-            <mesh ref={ref} castShadow receiveShadow geometry={nodes.mesh.geometry} {...props}>
-                <meshStandardMaterial color="#9d4b4b" />
-            </mesh>
-        </>
-    )
-})

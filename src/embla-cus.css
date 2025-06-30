@@ -1,0 +1,18 @@
+.embla {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  position: relative;
+  flex: 0 0 80%; /* 80% chiều rộng mỗi slide */
+  min-width: 0;
+  padding: 10px;
+}
