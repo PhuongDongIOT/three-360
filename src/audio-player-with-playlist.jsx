@@ -129,7 +129,7 @@ export default function AudioPlayerWithPlaylist() {
                                     aria-valuemax={4550}
                                 />
                             </div>
-                            <div className="ring-cyan-500 transition-all duration-500 dark:ring-cyan-400 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-2 flex items-center justify-center bg-white rounded-full shadow"  style={{ left: `${(currentTime / duration) * 100 + 4 || 0}%` }}>
+                            <div className="ring-cyan-500 transition-all duration-500 dark:ring-cyan-400 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-1 flex items-center justify-center bg-white rounded-full shadow"  style={{ left: `${(currentTime / duration) * 100 + 4 || 0}%` }}>
                                 <div className="w-1.5 h-1.5 bg-cyan-500 transition-all duration-500 dark:bg-cyan-400 rounded-full ring-1 ring-inset ring-slate-900/5"></div>
                             </div>
                         </div>

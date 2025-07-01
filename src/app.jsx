@@ -12,16 +12,10 @@ import CarouselWithEffect from './carousel.jsx'
 import MapComponent from './map-component.jsx'
 import SettingGrid from './setting-grid.jsx'
 import InfoCard from './info-card.jsx'
-import { Scene } from './scene.jsx'
-import SceneVideo from './scene-video.jsx'
-import { BackgroundAudio } from './background-audio.jsx'
 import { CloudScene } from './sky.jsx'
 import * as THREE from 'three'
 import { GroundImage } from './ground-image.jsx'
 import { soundButton } from './sound-button.jsx'
-import { folder, useControls } from 'leva'
-import SkyBox from './sky-box.jsx'
-import GlassSphere from './sphere-glass-materialtest.jsx'
 import GalleryWithPreview from './gallery-with-preview.jsx'
 import AudioPlayerWithPlaylist from './audio-player-with-playlist.jsx'
 // import { Viewcube } from './view-cube.jsx'
@@ -33,6 +27,8 @@ import IconButtonCol from './icon-button-col.jsx'
 import VerticalEmblaCarousel from './vertical-embla-carousel.jsx'
 import HorizontalEmblaCarousel from './horizontal-embla-carousel.jsx'
 import VRScene from './vr-scene.jsx'
+import TabWithGsap from './tab-with-gsap.jsx'
+import VideoEmblaCarousel from './video-embla-carousel.jsx'
 
 const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 const context = createContext()
@@ -58,24 +54,25 @@ export function App() {
     const [isOpenCarousel, setIsOpenCarousel] = useState(false)
     const [isOpenCarouselCus, setIsOpenCarouselCus] = useState(false)
     const [isOpenVr, setIsOpenVr] = useState(false)
+    const [isOpenIntro, setIsOpenIntro] = useState(false)
+    const [isOpenUtil, setIsOpenUtil] = useState(false)
+    const [isOpenVideo, setIsOpenVideo] = useState(false)
     const [currentImage, setCurrentImage] = useState('/assets/pano.jpg');
     const [list, setList] = useState(images)
     const controls = useRef()
 
     const { playSound } = soundButton({ url: '/click.wav' })
-    const handleClick = (e) => {
-        const position = e.object.position
-        controls.current?.fitToBox(e.object, true) // Tự động xoay + zoom đến object
-        // Hoặc dùng setLookAt
-        // controls.current.setLookAt(0, 5, 10, position.x, position.y, position.z, true)
-    }
-
     const buttons = [
-        { icon: 'home', label: 'Trang chủ', onClick: () => { playSound(); } },
         {
             icon: 'info', label: 'Thông tin', onClick: () => {
                 playSound();
                 setIsOpenInfo(true);
+            }
+        },
+        {
+            icon: 'home', label: 'Video', onClick: () => {
+                playSound();
+                setIsOpenVideo(true);
             }
         },
         {
@@ -99,7 +96,12 @@ export function App() {
     ]
 
     const buttonsLeft = [
-        { icon: 'home', label: 'Trang chủ', onClick: () => { playSound(); } },
+        {
+            icon: 'home', label: 'Giới thiệu', onClick: () => {
+                playSound();
+                setIsOpenIntro(true);
+            }
+        },
         {
             icon: 'info', label: 'vị trí', onClick: () => {
                 playSound();
@@ -107,15 +109,15 @@ export function App() {
             }
         },
         {
-            icon: 'map', label: 'Hình ảnh', onClick: () => {
+            icon: 'map', label: 'Tầng', onClick: () => {
                 playSound();
                 setIsOpenCarouselCus(true);
             }
         },
         {
-            icon: 'camera', label: 'Hình ảnh', onClick: () => {
+            icon: 'camera', label: 'Tiện ích', onClick: () => {
                 playSound();
-                setIsOpen(true);
+                setIsOpenUtil(true);
             }
         },
         {
@@ -150,8 +152,8 @@ export function App() {
                             color='blue'
                             onClick={() => {
                                 controls.current?.setLookAt(
-                                    0, 0, -300,    // Đặt camera ở đây
-                                    0, 0, -500,       // Nhìn về origin hoặc object nào đó
+                                    0, 0, -300,
+                                    0, 0, -500,
                                     true
                                 );
                                 setTimeout(() => {
@@ -172,8 +174,8 @@ export function App() {
                             color='pink'
                             onClick={() => {
                                 controls.current?.setLookAt(
-                                    0, 0, -300,    // Đặt camera ở đây
-                                    0, 0, -500,       // Nhìn về origin hoặc object nào đó
+                                    0, 0, -300,
+                                    0, 0, -500,
                                     true
                                 );
                                 setTimeout(() => {
@@ -193,23 +195,11 @@ export function App() {
                         <hemisphereLight groundColor='red' />
                         <Geometries />
                     </group>
-                    {/* <SceneVideo /> */}
                     <CloudScene />
                     <GroundImage />
-                    {/* <EffectComposer multisampling={false}>
-                        <DirtLensFlare />
-                        <Vignette />
-                        <Bloom mipmapBlur radius="0.9" luminanceThreshold="0.966" intensity="2" levels="4" />
-                        <SMAA />
-                    </EffectComposer> */}
                     <ambientLight intensity={0.5 * Math.PI} />
-                    {/* <Viewcube />
-                    <OrbitControls />
-                    <Environment preset="city" /> */}
                     <ContactShadows position={[0, -9, 0]} opacity={0.7} scale={40} blur={1} />
                     <CameraControls ref={controls} minDistance={5} maxDistance={500} />
-                    {/* <GlassSphere scale={1} /> */}
-                    {/* <SkyBox /> */}
                     <OrbitControls />
                     <Environment preset="city" />
                 </Canvas>
@@ -222,6 +212,12 @@ export function App() {
                     <IconButtonGrid buttons={buttons} />
                 </div>
             </div>
+            <Modal isOpen={isOpenIntro} onClose={() => setIsOpenIntro(false)}>
+                <InfoCard />
+            </Modal>
+            <Modal isOpen={isOpenVideo} onClose={() => setIsOpenVideo(false)}>
+                <VideoEmblaCarousel />
+            </Modal>
             <Modal isOpen={isOpenCarouselCus} onClose={() => setIsOpenCarouselCus(false)}>
                 <div className='grid grid-cols-5 max-w-6xl h-[500px] gap-2 l:gap-4'>
                     <div className='col-span-1 flex flex-col gap-2'>
@@ -231,7 +227,7 @@ export function App() {
                                     <img
                                         src={item}
                                         alt={`Slide ${index}`}
-                                        className="w-full h-full object-cover rounded-xl"
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                             )
@@ -253,10 +249,76 @@ export function App() {
                 </div>
             </Modal>
             <Modal isOpen={isOpenInfo} onClose={() => setIsOpenInfo(false)}>
-                <InfoCard />
+                <TabWithGsap />
             </Modal>
             <Modal isOpen={isOpenSetting} onClose={() => setIsOpenSetting(false)}>
                 <SettingGrid />
+            </Modal>
+            <Modal isOpen={isOpenUtil} onClose={() => setIsOpenUtil(false)}>
+                <div>
+                    <div className='flex mb-1 h-24 gap-2'>
+                        <div className='h-24 w-full relative group'>
+                            <img
+                                src='/7.jpg'
+                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                            />
+                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
+                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                                    Lorem ipsum dolor
+                                </p>
+                            </div>
+                        </div>
+                        <div className='h-24 w-full relative group'>
+                            <img
+                                src='/7.jpg'
+                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                            />
+                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
+                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                                    Lorem ipsum dolor
+                                </p>
+                            </div>
+                        </div>
+                        <div className='h-24 w-full relative group'>
+                            <img
+                                src='/7.jpg'
+                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                            />
+                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
+                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                                    Lorem ipsum dolor
+                                </p>
+                            </div>
+                        </div>
+                        <div className='h-24 w-full relative group'>
+                            <img
+                                src='/7.jpg'
+                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                            />
+                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
+                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                                    Lorem ipsum dolor
+                                </p>
+                            </div>
+                        </div>
+                        <div className='h-24 w-full relative group'>
+                            <img
+                                src='/7.jpg'
+                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                            />
+                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
+                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                                    Lorem ipsum dolor
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <GalleryWithPreview
+                        list={list}
+                        setList={setList}
+                        imagesAnother={images_another}
+                    />
+                </div>
             </Modal>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 <GalleryWithPreview
@@ -271,84 +333,9 @@ export function App() {
             <AudioPlayerWithPlaylist />
             {/* <BackgroundAudio src='/music.mp3' /> */}
         </div>
-    ) :
-        (
-            <div className="h-screen w-screen">
-                <VRScene />
-            </div>
-        )
-}
-
-
-
-function Torus(props) {
-    const [hovered, hover] = useState(false)
-    return (
-        <mesh onPointerOver={(e) => hover(true)} onPointerOut={(e) => hover(false)} {...props}>
-            <torusGeometry args={[1, 0.25, 32, 100]} />
-            <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-        </mesh>
-    )
-}
-
-function Viewcube({ renderPriority = 1, matrix = new THREE.Matrix4() }) {
-    const mesh = useRef(null)
-    const { camera, viewport } = useThree()
-    const texture = useTexture('/assets/pano.jpg')
-
-    useFrame(() => {
-        // Spin mesh to the inverse of the default cameras matrix
-        matrix.copy(camera.matrix).invert()
-        mesh.current.quaternion.setFromRotationMatrix(matrix)
-    })
-
-    return (
-        <Hud renderPriority={renderPriority}>
-            <ambientLight intensity={Math.PI / 2} />
-            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-            <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-            <PerspectiveCamera makeDefault position={[0, 0, 10]} />
-            <mesh ref={mesh} position={[viewport.width / 2, viewport.height / 2 - 0.5, 0]}>
-                <sphereGeometry args={[0.7, 24, 24]} />
-                <meshBasicMaterial map={texture} side={THREE.BackSide} />
-            </mesh>
-            <ambientLight intensity={1} />
-            <pointLight position={[200, 200, 100]} intensity={0.5} />
-        </Hud>
-    )
-}
-
-const Box = forwardRef(({ children, ...props }, fref) => {
-    const ref = useRef()
-    const [hovered, hover] = useState(false)
-    const [clicked, click] = useState(false)
-    useFrame((state, delta) => (ref.current.rotation.x += delta))
-    useImperativeHandle(fref, () => ref.current, [])
-    return (
-        <mesh
-            {...props}
-            ref={ref}
-            scale={clicked ? 1.5 : 1}
-            onClick={(event) => click(!clicked)}
-            onPointerMove={(event) => (event.stopPropagation(), hover(event.face.materialIndex))}
-            onPointerOut={() => hover(false)}>
-            <boxGeometry />
-            <context.Provider value={hovered}>{children}</context.Provider>
-        </mesh>
-    )
-})
-
-function FaceMaterial({ children, index, ...props }) {
-    const hovered = useContext(context)
-    return (
-        <meshStandardMaterial attach={`material-${index}`} color={hovered === index ? 'hotpink' : 'orange'} {...props}>
-            <RenderTexture frames={6} attach="map" anisotropy={16}>
-                <color attach="background" args={['white']} />
-                <OrthographicCamera makeDefault left={-1} right={1} top={1} bottom={-1} position={[0, 0, 10]} zoom={0.5} />
-                <Text font={suspend(medium).default} color="black">
-                    {children}
-                </Text>
-            </RenderTexture>
-        </meshStandardMaterial>
+    ) : (
+        <div className="h-screen w-screen">
+            <VRScene />
+        </div>
     )
 }

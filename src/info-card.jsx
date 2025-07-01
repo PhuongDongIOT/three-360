@@ -2,8 +2,8 @@ export default function InfoCard() {
 
     return (
         <div className="w-full shadow-inner rounded-xl py-2 lg:py-4 px-4 lg:px-6 mx-auto">
-            <div class="relative isolate overflow-hidden py-2 lg:py-6 lg:overflow-visible lg:px-0">
-                <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-4 gap-y-4 lg:gap-x-8 lg:gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start">
+            <div class="relative isolate overflow-hidden py-2 lg:overflow-visible lg:px-0">
+                <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-4 gap-y-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start">
                     <div class="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:gap-x-8 lg:px-8">
                         <div class="lg:pr-4">
                             <div class="w-full text-white">

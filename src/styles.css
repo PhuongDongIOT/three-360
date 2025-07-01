@@ -67,3 +67,10 @@
 .box-animated:hover {
   transform: rotate3d(0, 0, 0, 0deg) rotate(0deg);
 }
+
+.nocopy {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
