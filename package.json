@@ -21,6 +21,7 @@
     "@react-three/fiber": "^9.1.2",
     "@react-three/postprocessing": "^3.0.4",
     "@react-three/xr": "^6.6.17",
+    "@rollup/rollup-linux-x64-gnu": "^4.44.1",
     "@tailwindcss/vite": "^4.1.10",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
