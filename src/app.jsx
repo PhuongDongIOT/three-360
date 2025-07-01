@@ -29,6 +29,7 @@ import HorizontalEmblaCarousel from './horizontal-embla-carousel.jsx'
 import VRScene from './vr-scene.jsx'
 import TabWithGsap from './tab-with-gsap.jsx'
 import VideoEmblaCarousel from './video-embla-carousel.jsx'
+import VerticalTextScroll from './vertical-text-scroll.jsx'
 
 const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 const context = createContext()
@@ -216,7 +217,70 @@ export function App() {
                 <InfoCard />
             </Modal>
             <Modal isOpen={isOpenVideo} onClose={() => setIsOpenVideo(false)}>
-                <VideoEmblaCarousel />
+
+                <VerticalTextScroll />
+                <div className='flex relative'>
+                    <VideoEmblaCarousel />
+                    <div className="absolute sm:relative bottom-0 sm:top-0 right-0 max-w-[232px] rounded-xl shadow-inner bg-white/10 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none">
+                        <div className="relative z-10 rounded-xl shadow-xl">
+                            <div className="transition-all duration-500 rounded-t-xl p-2 lg:px-4 lg:pt-4 space-y-2 sm:space-y-4">
+                                <div className="flex flex-col space-x-4">
+                                    <video
+                                        className="flex-none rounded-lg bg-slate-100 object-cover w-full"
+                                        src="/video.mp4"
+                                        muted
+                                        loop
+                                        playsInline
+                                    />
+                                    <div className="min-w-0 flex-auto space-y-1 font-semibold">
+                                        <h2 className="text-white transition-all duration-500 text-sm leading-6 truncate">
+                                            🎵 Nhạc
+                                        </h2>
+                                        <p className="text-white transition-all duration-500 sm:text-xs line-clamp-2 sm:line-clamp-4 md:line-clamp-none">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui incidunt quod consequuntur reprehenderit, nisi odio, dolorem quisquam possimus vero molestias repellendus, mollitia nihil corrupti commodi numquam deserunt vitae? Veritatis, tempora!
+                                        </p>
+                                    </div>
+                                    <div className='hidden sm:grid sm:grid-cols-4 sm:mt-2'>
+                                        {images.map((item, index) => {
+                                            return (
+                                                <div className='h-24 w-full'>
+                                                    <img
+                                                        src={item}
+                                                        alt={`Slide ${index}`}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
+                                            )
+                                        })}
+                                        {images.map((item, index) => {
+                                            return (
+                                                <div className='h-24 w-full'>
+                                                    <img
+                                                        src={item}
+                                                        alt={`Slide ${index}`}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
+                                            )
+                                        })}
+                                        {images.slice(0, 2).map((item, index) => {
+                                            return (
+                                                <div className='h-24 w-full'>
+                                                    <img
+                                                        src={item}
+                                                        alt={`Slide ${index}`}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </Modal>
             <Modal isOpen={isOpenCarouselCus} onClose={() => setIsOpenCarouselCus(false)}>
                 <div className='grid grid-cols-5 max-w-6xl h-[500px] gap-2 l:gap-4'>
@@ -239,7 +303,7 @@ export function App() {
                 </div>
             </Modal>
             <Modal isOpen={isOpenCarousel} onClose={() => setIsOpenCarousel(false)}>
-                <div className='grid grid-cols-4 max-w-4xl w-full mxx-auto h-[500px]'>
+                <div className='grid grid-cols-4 max-w-6xl w-full mxx-auto h-[500px]'>
                     <div className='col-span-3'>
                         <img src="/location.png" alt="" srcSet="" />
                     </div>
@@ -330,7 +394,7 @@ export function App() {
             <Modal isOpen={isOpenMap} onClose={() => setIsOpenMap(false)}>
                 <MapComponent />
             </Modal>
-            <AudioPlayerWithPlaylist />
+            {/* <AudioPlayerWithPlaylist /> */}
             {/* <BackgroundAudio src='/music.mp3' /> */}
         </div>
     ) : (
