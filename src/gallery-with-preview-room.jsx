@@ -43,15 +43,15 @@ export default function GalleryWithPreviewRoom() {
     }, [isVideo])
 
     return (
-        <div className="grid grid-cols-4 gap-1">
-            <div className="flex flex-col justify-between gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-1">
+            <div className="flex md:flex-col justify-between gap-1 md:gap-2">
                 <div className="h-22 w-full relative" onClick={() => onChangeState(0)}>
                     <img
                         src={'/rooms/1. Căn hộ loại A - 52m2 - 1PN_1WC.png'}
                         className="w-full h-full object-cover cursor-pointer"
                     />
                     <div className="absolute bottom-0 right-0">
-                        <p className="px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">MẶT BẰNG</p>
+                        <p className="text-xs md:text-sm px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">MẶT BẰNG</p>
                     </div>
                 </div>
                 <div className="h-22 w-full relative" onClick={() => onChangeState(1)}>
@@ -60,7 +60,7 @@ export default function GalleryWithPreviewRoom() {
                         className="w-full h-full object-cover cursor-pointer"
                     />
                     <div className="absolute bottom-0 right-0">
-                        <p className="px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">HÌNH ẢNH</p>
+                        <p className="text-xs md:text-sm px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">HÌNH ẢNH</p>
                     </div>
                 </div>
                 <div className="h-22 w-full relative" onClick={() => onChangeState(2)}>
@@ -69,7 +69,7 @@ export default function GalleryWithPreviewRoom() {
                         className="w-full h-full object-cover cursor-pointer"
                     />
                     <div className="absolute bottom-0 right-0">
-                        <p className="px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">HÌNH ẢNH 360</p>
+                        <p className="text-xs md:text-sm px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">HÌNH ẢNH 360</p>
                     </div>
                 </div>
                 <div className="h-22 w-full relative" onClick={() => onChangeState(3)}>
@@ -78,7 +78,7 @@ export default function GalleryWithPreviewRoom() {
                         className="w-full h-full object-cover cursor-pointer"
                     />
                     <div className="absolute bottom-0 right-0">
-                        <p className="px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">THÔNG TIN THÊM</p>
+                        <p className="text-xs md:text-sm px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">THÔNG TIN THÊM</p>
                     </div>
                 </div>
                 <div className="h-22 w-full relative" onClick={() => onChangeState(4)}>
@@ -87,7 +87,7 @@ export default function GalleryWithPreviewRoom() {
                         className="w-full h-full object-cover cursor-pointer"
                     />
                     <div className="absolute bottom-0 right-0">
-                        <p className="px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">VIDEO GIỚI THIỆU</p>
+                        <p className="text-xs md:text-sm px-2 py-2 font-bold bg-gray-50/20 backdrop-blur-md">VIDEO GIỚI THIỆU</p>
                     </div>
                 </div>
             </div>

@@ -31,6 +31,7 @@ import TabWithGsap from './tab-with-gsap.jsx'
 import VideoEmblaCarousel from './video-embla-carousel.jsx'
 import VerticalTextScroll from './vertical-text-scroll.jsx'
 import GalleryWithPreviewRoom from './gallery-with-preview-room.jsx'
+import { ObjModel } from './model-viewer.jsx'
 
 const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 const context = createContext()
@@ -284,8 +285,8 @@ export function App() {
 
             </Modal>
             <Modal isOpen={isOpenCarouselCus} onClose={() => setIsOpenCarouselCus(false)}>
-                <div className='grid grid-cols-5 max-w-6xl h-[500px] gap-2 l:gap-4'>
-                    <div className='col-span-1 flex flex-col gap-2'>
+                <div className='grid grid-cols-1 md:grid-cols-5 max-w-6xl h-[500px] gap-2 l:gap-4'>
+                    <div className='col-span-1 flex md:flex-col gap-1 md:gap-2 w-full'>
                         {images.map((item, index) => {
                             return (
                                 <div className='h-24 w-full'>
@@ -304,7 +305,7 @@ export function App() {
                 </div>
             </Modal>
             <Modal isOpen={isOpenCarousel} onClose={() => setIsOpenCarousel(false)}>
-                <div className='grid grid-cols-4 max-w-6xl w-full mxx-auto h-[500px]'>
+                <div className='grid grid-cols- md:grid-cols-4 max-w-6xl w-full mxx-auto h-[500px]'>
                     <div className='col-span-3'>
                         <img src="/location.png" alt="" srcSet="" />
                     </div>
@@ -317,7 +318,7 @@ export function App() {
                 <TabWithGsap />
             </Modal>
             <Modal isOpen={isOpenSetting} onClose={() => setIsOpenSetting(false)}>
-                <SettingGrid />
+                <ObjModel />
             </Modal>
             <Modal isOpen={isOpenUtil} onClose={() => setIsOpenUtil(false)}>
                 <div>
@@ -328,7 +329,7 @@ export function App() {
                                 className="w-full h-24 object-cover cursor-pointer"
                             />
                             <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
-                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-16 md:w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>
@@ -339,7 +340,7 @@ export function App() {
                                 className="w-full h-24 object-cover cursor-pointer"
                             />
                             <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
-                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-16 md:w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>
@@ -350,7 +351,7 @@ export function App() {
                                 className="w-full h-24 object-cover cursor-pointer"
                             />
                             <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
-                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-16 md:w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>
@@ -361,7 +362,7 @@ export function App() {
                                 className="w-full h-24 object-cover cursor-pointer"
                             />
                             <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
-                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-16 md:w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>
@@ -372,7 +373,7 @@ export function App() {
                                 className="w-full h-24 object-cover cursor-pointer"
                             />
                             <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
-                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-16 md:w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>

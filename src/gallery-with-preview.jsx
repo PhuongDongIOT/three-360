@@ -4,8 +4,8 @@ const thumbnailImages = ['/7.jpg', '/8.jpg', '/9.jpg', '/10.jpg']
 
 export default function GalleryWithPreview({ list, setList, imagesAnother }) {
   return (
-    <div className="grid grid-cols-4">
-      <div className="flex flex-col gap-2">
+    <div className="grid grid-cols-1 md:grid-cols-4">
+      <div className="flex md:flex-col gap-1 md:gap-2">
         {thumbnailImages.map((img, index) => (
           <div key={index} className="h-24 w-full">
             <img
