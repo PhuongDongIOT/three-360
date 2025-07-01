@@ -31,7 +31,7 @@ import TabWithGsap from './tab-with-gsap.jsx'
 import VideoEmblaCarousel from './video-embla-carousel.jsx'
 import VerticalTextScroll from './vertical-text-scroll.jsx'
 import GalleryWithPreviewRoom from './gallery-with-preview-room.jsx'
-import { ObjModel } from './model-viewer.jsx'
+import GLBViewer from './model-viewer.jsx'
 
 const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 const context = createContext()
@@ -318,7 +318,7 @@ export function App() {
                 <TabWithGsap />
             </Modal>
             <Modal isOpen={isOpenSetting} onClose={() => setIsOpenSetting(false)}>
-                <ObjModel />
+                <GLBViewer />
             </Modal>
             <Modal isOpen={isOpenUtil} onClose={() => setIsOpenUtil(false)}>
                 <div>

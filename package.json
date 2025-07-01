@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
-    "@google/model-viewer": "^4.1.0",
     "@pmndrs/assets": "^1.7.0",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.3.0",
