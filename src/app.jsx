@@ -30,6 +30,7 @@ import VRScene from './vr-scene.jsx'
 import TabWithGsap from './tab-with-gsap.jsx'
 import VideoEmblaCarousel from './video-embla-carousel.jsx'
 import VerticalTextScroll from './vertical-text-scroll.jsx'
+import GalleryWithPreviewRoom from './gallery-with-preview-room.jsx'
 
 const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 const context = createContext()
@@ -71,6 +72,12 @@ export function App() {
             }
         },
         {
+            icon: 'arrow', label: 'Mô hình', onClick: () => {
+                playSound();
+                setIsOpenSetting(true);
+            }
+        },
+        {
             icon: 'home', label: 'Video', onClick: () => {
                 playSound();
                 setIsOpenVideo(true);
@@ -86,12 +93,6 @@ export function App() {
             icon: 'camera', label: 'Hình ảnh', onClick: () => {
                 playSound();
                 setIsOpen(true);
-            }
-        },
-        {
-            icon: 'arrow', label: 'Cài đặt', onClick: () => {
-                playSound();
-                setIsOpenSetting(true);
             }
         },
     ]
@@ -323,65 +324,61 @@ export function App() {
                     <div className='flex mb-1 h-24 gap-2'>
                         <div className='h-24 w-full relative group'>
                             <img
-                                src='/7.jpg'
-                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                                src='/rooms/Mặt bằng căn hộ loại C.png'
+                                className="w-full h-24 object-cover cursor-pointer"
                             />
-                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
-                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                            <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>
                         </div>
                         <div className='h-24 w-full relative group'>
                             <img
-                                src='/7.jpg'
-                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                                src='/rooms/Mặt bằng căn hộ loại C.png'
+                                className="w-full h-24 object-cover cursor-pointer"
                             />
-                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
-                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                            <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>
                         </div>
                         <div className='h-24 w-full relative group'>
                             <img
-                                src='/7.jpg'
-                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                                src='/rooms/Mặt bằng căn hộ loại C.png'
+                                className="w-full h-24 object-cover cursor-pointer"
                             />
-                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
-                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                            <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>
                         </div>
                         <div className='h-24 w-full relative group'>
                             <img
-                                src='/7.jpg'
-                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                                src='/rooms/Mặt bằng căn hộ loại C.png'
+                                className="w-full h-24 object-cover cursor-pointer"
                             />
-                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
-                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                            <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>
                         </div>
                         <div className='h-24 w-full relative group'>
                             <img
-                                src='/7.jpg'
-                                className="w-full h-24 object-cover cursor-pointer blur-xs hover:blur-none transition duration-500 group-hover:blur-none"
+                                src='/rooms/Mặt bằng căn hộ loại C.png'
+                                className="w-full h-24 object-cover cursor-pointer"
                             />
-                            <div className='absolute top-[50%] left-[50%] transform -translate-[50%]'>
-                                <p className='text-md font-bold text-white w-28 text-center uppercase'>
+                            <div className='absolute bottom-0 left-[50%] transform -translate-x-[50%]'>
+                                <p className='text-[xx-small] lg:text-sm font-bold text-white w-32 text-center uppercase px-1 py-1 bg-gray-50/20 backdrop-blur-md hover:backdrop-blur-none groud-hover:backdrop-blur-none hover:bg-transparent groud-hover:bg-transparent rounded-t-xl overflow-hidden transition duration-200'>
                                     Lorem ipsum dolor
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <GalleryWithPreview
-                        list={list}
-                        setList={setList}
-                        imagesAnother={images_another}
-                    />
+                    <GalleryWithPreviewRoom />
                 </div>
             </Modal>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
@@ -394,7 +391,7 @@ export function App() {
             <Modal isOpen={isOpenMap} onClose={() => setIsOpenMap(false)}>
                 <MapComponent />
             </Modal>
-            {/* <AudioPlayerWithPlaylist /> */}
+            <AudioPlayerWithPlaylist />
             {/* <BackgroundAudio src='/music.mp3' /> */}
         </div>
     ) : (

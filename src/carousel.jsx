@@ -2,9 +2,10 @@ import React, { useCallback, useRef, useState, useEffect } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import gsap from 'gsap'
+import clsx from 'clsx';
 
 function CarouselWithEffect(props) {
-    const { images } = props;
+    const { images, className } = props;
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
     const containerRef = useRef(null)
 
@@ -36,7 +37,7 @@ function CarouselWithEffect(props) {
                                 <img
                                     src={src}
                                     alt={`Slide ${index}`}
-                                    className="w-full h-[400px] object-cover rounded-xl"
+                                    className={clsx('w-full h-[400px] object-cover rounded-xl', className)}
                                 />
                             </div>
                         ))}

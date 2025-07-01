@@ -26,7 +26,7 @@ export default function IconButtonCol({ buttons = [] }) {
                         <div className='w-full mx-auto flex justify-center'>
                             <Icon className="font-bold w-6 h-6 text-white" />
                         </div>
-                        <span className="font-bold text-white text-2xs lg:text-xs">{btn.label}</span>
+                        <span className="font-bold text-white text-[x-small] lg:text-xs">{btn.label}</span>
                     </button>
                 )
             })}

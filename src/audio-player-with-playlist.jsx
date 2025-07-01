@@ -7,12 +7,12 @@ const playlist = [
 ]
 
 export default function AudioPlayerWithPlaylist() {
-   const audioRef = useRef(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isExpanded, setIsExpanded] = useState(true)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
+    const audioRef = useRef(null)
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [isExpanded, setIsExpanded] = useState(true)
+    const [currentTime, setCurrentTime] = useState(0)
+    const [duration, setDuration] = useState(0)
 
     const play = () => {
         audioRef.current?.play()
@@ -20,20 +20,13 @@ export default function AudioPlayerWithPlaylist() {
     }
 
     const pause = () => {
-        audioRef.current?.pause()
         setIsPlaying(false)
+        audioRef.current?.pause()
     }
 
     const togglePlay = () => {
         isPlaying ? pause() : play()
-    }
 
-    const playSongAt = (index) => {
-        setCurrentIndex(index)
-        setTimeout(() => {
-            audioRef.current?.play()
-            setIsPlaying(true)
-        }, 100)
     }
 
     const playNext = () => {
@@ -48,41 +41,41 @@ export default function AudioPlayerWithPlaylist() {
         setTimeout(() => audioRef.current?.play(), 100)
     }
 
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
+    useEffect(() => {
+        const audio = audioRef.current
+        if (!audio) return
 
-    const handleEnded = () => playNext()
-    const handleTimeUpdate = () => setCurrentTime(audio.currentTime)
-    const handleLoadedMetadata = () => setDuration(audio.duration)
+        const handleEnded = () => playNext()
+        const handleTimeUpdate = () => setCurrentTime(audio.currentTime)
+        const handleLoadedMetadata = () => setDuration(audio.duration)
 
-    audio.addEventListener('ended', handleEnded)
-    audio.addEventListener('timeupdate', handleTimeUpdate)
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
+        audio.addEventListener('ended', handleEnded)
+        audio.addEventListener('timeupdate', handleTimeUpdate)
+        audio.addEventListener('loadedmetadata', handleLoadedMetadata)
 
-    return () => {
-      audio.removeEventListener('ended', handleEnded)
-      audio.removeEventListener('timeupdate', handleTimeUpdate)
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
-    }
-  }, [currentIndex])
+        return () => {
+            audio.removeEventListener('ended', handleEnded)
+            audio.removeEventListener('timeupdate', handleTimeUpdate)
+            audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
+        }
+    }, [currentIndex])
 
-  useEffect(() => {
-    const handleClick = () => {
-      if (!isPlaying) {
-        play()
-      }
-    }
-    window.addEventListener('click', handleClick, { once: true })
-    return () => window.removeEventListener('click', handleClick)
-  }, [isPlaying])
+    useEffect(() => {
+        const handleClick = () => {
+            if (!isPlaying) {
+                play()
+            }
+        }
+        window.addEventListener('click', handleClick, { once: true })
+        return () => window.removeEventListener('click', handleClick)
+    }, [])
 
     const formatTime = (sec) => {
-    if (!sec) return '00:00'
-    const minutes = Math.floor(sec / 60).toString().padStart(2, '0')
-    const seconds = Math.floor(sec % 60).toString().padStart(2, '0')
-    return `${minutes}:${seconds}`
-  }
+        if (!sec) return '00:00'
+        const minutes = Math.floor(sec / 60).toString().padStart(2, '0')
+        const seconds = Math.floor(sec % 60).toString().padStart(2, '0')
+        return `${minutes}:${seconds}`
+    }
 
     return (
         <div className='fixed top-2 md:top-auto md:bottom-4 right-2 w-[300px] shadow-xl rounded-xl shadown-inner bg-white/10 backdrop-blur-md  z-50'>
@@ -129,7 +122,7 @@ export default function AudioPlayerWithPlaylist() {
                                     aria-valuemax={4550}
                                 />
                             </div>
-                            <div className="ring-cyan-500 transition-all duration-500 dark:ring-cyan-400 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-1 flex items-center justify-center bg-white rounded-full shadow"  style={{ left: `${(currentTime / duration) * 100 + 4 || 0}%` }}>
+                            <div className="ring-cyan-500 transition-all duration-500 dark:ring-cyan-400 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-1 flex items-center justify-center bg-white rounded-full shadow" style={{ left: `${(currentTime / duration) * 100 + 4 || 0}%` }}>
                                 <div className="w-1.5 h-1.5 bg-cyan-500 transition-all duration-500 dark:bg-cyan-400 rounded-full ring-1 ring-inset ring-slate-900/5"></div>
                             </div>
                         </div>
