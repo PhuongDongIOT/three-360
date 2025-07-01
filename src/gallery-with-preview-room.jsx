@@ -1,7 +1,7 @@
 import CarouselWithEffect from './carousel'
 
 import { useEffect, useRef, useState } from "react"
-import { Pannellum } from 'pannellum-react'
+// import { Pannellum } from 'pannellum-react'
 import ApartmentType from "./apartment-type"
 import ApartmentDetailCard from './apartment-detail-card'
 
@@ -112,7 +112,7 @@ export default function GalleryWithPreviewRoom() {
                 {
                     isImage ? <CarouselWithEffect images={list} className={'h-[500px]'} /> : null
                 }
-                {isPano ? <Pannellum
+                {/* {isPano ? <Pannellum
                     width="100%"
                     height="500px"
                     image="/assets/pano.jpg"
@@ -121,8 +121,7 @@ export default function GalleryWithPreviewRoom() {
                     hfov={110}
                     autoLoad
                     showZoomCtrl={false}
-                /> : null
-                }
+                /> : null} */}
                 {isInfo ? <ApartmentDetailCard /> : null}
                 {isVideo ? <video
                     ref={videoRef}
