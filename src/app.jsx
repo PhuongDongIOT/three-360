@@ -1,29 +1,19 @@
 import { Canvas } from '@react-three/fiber'
-import { AdaptiveDpr, AdaptiveEvents, CameraControls, ContactShadows, Environment, OrbitControls, useTexture } from '@react-three/drei'
-import { Bloom, EffectComposer, SMAA, Vignette, LensFlare } from '@react-three/postprocessing'
+import { AdaptiveDpr, AdaptiveEvents, CameraControls, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
 import { Hotspot } from './hotspot.jsx'
 import { Geometries } from './geometries.jsx'
 import { Vector3 } from 'three'
-import { useRef, useState } from 'react'
+import { useRef, useState, createContext } from 'react'
 import PanoramaWithTransition from './panorama-with-transition.jsx'
 import IconButtonGrid from './icon-button-grid.jsx'
 import Modal from './modal.jsx'
-import CarouselWithEffect from './carousel.jsx'
 import MapComponent from './map-component.jsx'
-import SettingGrid from './setting-grid.jsx'
 import InfoCard from './info-card.jsx'
 import { CloudScene } from './sky.jsx'
-import * as THREE from 'three'
 import { GroundImage } from './ground-image.jsx'
 import { soundButton } from './sound-button.jsx'
 import GalleryWithPreview from './gallery-with-preview.jsx'
 import AudioPlayerWithPlaylist from './audio-player-with-playlist.jsx'
-// import { Viewcube } from './view-cube.jsx'
-import { useContext, createContext, forwardRef, useImperativeHandle } from 'react'
-import { useFrame, useThree } from '@react-three/fiber'
-import { Hud, RenderTexture, OrthographicCamera, PerspectiveCamera, Text } from '@react-three/drei'
-import { suspend } from 'suspend-react'
-import IconButtonCol from './icon-button-col.jsx'
 import VerticalEmblaCarousel from './vertical-embla-carousel.jsx'
 import HorizontalEmblaCarousel from './horizontal-embla-carousel.jsx'
 import VRScene from './vr-scene.jsx'
@@ -32,10 +22,7 @@ import VideoEmblaCarousel from './video-embla-carousel.jsx'
 import VerticalTextScroll from './vertical-text-scroll.jsx'
 import GalleryWithPreviewRoom from './gallery-with-preview-room.jsx'
 import GLBViewer from './model-viewer.jsx'
-
-const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
-const context = createContext()
-
+import CollapsibleSidebar from './collapsible-sidebar.jsx'
 
 const images = [
     '/1.jpg',
@@ -67,31 +54,31 @@ export function App() {
     const { playSound } = soundButton({ url: '/click.wav' })
     const buttons = [
         {
-            icon: 'info', label: 'Thông tin', onClick: () => {
+            icon: 'info', label: 'THÔNG TIN', onClick: () => {
                 playSound();
                 setIsOpenInfo(true);
             }
         },
         {
-            icon: 'arrow', label: 'Mô hình', onClick: () => {
+            icon: 'arrow', label: 'MÔ HÌNH', onClick: () => {
                 playSound();
                 setIsOpenSetting(true);
             }
         },
         {
-            icon: 'home', label: 'Video', onClick: () => {
+            icon: 'home', label: 'VIDEO', onClick: () => {
                 playSound();
                 setIsOpenVideo(true);
             }
         },
         {
-            icon: 'map', label: 'Bản đồ', onClick: () => {
+            icon: 'map', label: 'BẢN ĐỒ', onClick: () => {
                 playSound();
                 setIsOpenMap(true);
             }
         },
         {
-            icon: 'camera', label: 'Hình ảnh', onClick: () => {
+            icon: 'camera', label: 'HÌNH ẢNH', onClick: () => {
                 playSound();
                 setIsOpen(true);
             }
@@ -100,25 +87,25 @@ export function App() {
 
     const buttonsLeft = [
         {
-            icon: 'home', label: 'Giới thiệu', onClick: () => {
+            icon: 'home', label: 'GIỚI THIỆU', onClick: () => {
                 playSound();
                 setIsOpenIntro(true);
             }
         },
         {
-            icon: 'info', label: 'vị trí', onClick: () => {
+            icon: 'info', label: 'VỊ TRÍ', onClick: () => {
                 playSound();
                 setIsOpenCarousel(true);
             }
         },
         {
-            icon: 'map', label: 'Tầng', onClick: () => {
+            icon: 'map', label: 'TẦNG', onClick: () => {
                 playSound();
                 setIsOpenCarouselCus(true);
             }
         },
         {
-            icon: 'camera', label: 'Tiện ích', onClick: () => {
+            icon: 'camera', label: 'TIỆN ÍCH', onClick: () => {
                 playSound();
                 setIsOpenUtil(true);
             }
@@ -207,9 +194,7 @@ export function App() {
                     <Environment preset="city" />
                 </Canvas>
             </div>
-            <div className='fixed top-0 left-0 w-16 h-full flex flex-col justify-center'>
-                <IconButtonCol buttons={buttonsLeft} />
-            </div>
+            <CollapsibleSidebar buttons={buttonsLeft} />
             <div className='fixed bottom-0 left-0 w-full'>
                 <div className='max-w-4xl mx-auto'>
                     <IconButtonGrid buttons={buttons} />
@@ -393,7 +378,6 @@ export function App() {
                 <MapComponent />
             </Modal>
             <AudioPlayerWithPlaylist />
-            {/* <BackgroundAudio src='/music.mp3' /> */}
         </div>
     ) : (
         <div className="h-screen w-screen">

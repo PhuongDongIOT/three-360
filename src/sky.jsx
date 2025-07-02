@@ -10,7 +10,7 @@ export function CloudScene() {
             {/* <StatsGl /> */}
             <Sky />
             <ambientLight intensity={Math.PI / 1.5} />
-            <spotLight position={[0, 40, 0]} decay={0} distance={45} penumbra={1} intensity={100} />
+            <spotLight position={[0, 40, 0]} decay={0} distance={45} penumbra={1} intensity={50} />
             <spotLight position={[-20, 0, 10]} color="red" angle={0.15} decay={0} penumbra={-1} intensity={30} />
             <spotLight position={[20, -10, 10]} color="red" angle={0.2} decay={0} penumbra={-1} intensity={20} />
         </group>
@@ -28,9 +28,9 @@ function Sky() {
         fade: { value: 215, min: 0, max: 400, step: 1 },
         growth: { value: 16, min: 0, max: 20, step: 1 },
         speed: { value: 1, min: 0, max: 1, step: 0.01 },
-        x: { value: 100, min: 0, max: 100, step: 1 },
-        y: { value: 100, min: 0, max: 100, step: 1 },
-        z: { value: 80, min: 0, max: 100, step: 1 },
+        x: { value: 300, min: -200, max: 300, step: 1 },
+        y: { value: 300, min: -200, max: 300, step: 1 },
+        z: { value: 300, min: -200, max: 300, step: 1 },
         color: "white",
     }
     useFrame((state, delta) => {

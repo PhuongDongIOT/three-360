@@ -1,16 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 
 const playlist = [
-    { title: 'Nhạc nền 1', url: '/music1.mp3' },
-    { title: 'Nhạc nền 2', url: '/music2.mp3' },
-    { title: 'Nhạc nền 3', url: '/music3.mp3' },
+    { title: 'You & Me', url: '/music/Peder B. Helland - You & Me (Radio Edit).mp3' },
+    { title: 'My Love', url: '/music/Peder B. Helland - My Love (Radio Edit).mp3' },
+    { title: 'Forever', url: '/music/Forever (Radio Edit).mp3' },
+    { title: 'Yellow Flower', url: '/music/Forever (Radio Edit).mp3' },
+    { title: 'Evening Waves', url: '/music/Evening Waves (Radio Edit).mp3' },
+    { title: 'Rainy Day', url: '/music/Rainy Day (Radio Edit).mp3' },
 ]
 
 export default function AudioPlayerWithPlaylist() {
     const audioRef = useRef(null)
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isPlaying, setIsPlaying] = useState(false)
-    const [isExpanded, setIsExpanded] = useState(true)
+    const [isExpanded, setIsExpanded] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
     const [duration, setDuration] = useState(0)
 
@@ -78,7 +81,7 @@ export default function AudioPlayerWithPlaylist() {
     }
 
     return (
-        <div className='fixed top-2 md:top-auto md:bottom-4 right-2 w-[300px] shadow-xl rounded-xl shadown-inner bg-white/10 backdrop-blur-md  z-50'>
+        <div className='fixed top-2 md:top-auto md:bottom-4 right-2 w-[260px] md:w-[300px] shadow-xl rounded-xl shadown-inner bg-white/10 backdrop-blur-md  z-50'>
             <div className="relative z-10 rounded-xl shadow-xl">
                 <button
                     className="absolute top-0 right-0 text-gray-500 text-xs"
@@ -98,8 +101,8 @@ export default function AudioPlayerWithPlaylist() {
                             height={64}
                         />
                         <div className="min-w-0 flex-auto space-y-1 font-semibold">
-                            <p className="text-cyan-500 transition-all duration-500 dark:text-cyan-400 text-sm leading-6">
-                                <abbr title="Episode">Ep.</abbr> 128
+                            <p className="mb-0 md:mb-auto text-cyan-500 transition-all duration-500 dark:text-cyan-400 text-sm leading-6">
+                                <abbr title="Episode">Peder</abbr> B. Helland
                             </p>
                             <h2 className="text-white transition-all duration-500 text-sm leading-6 truncate">
                                 🎵 {playlist[currentIndex].title}
@@ -152,7 +155,7 @@ export default function AudioPlayerWithPlaylist() {
                             </button>
                             <button
                                 type="button"
-                                className="hidden sm:block lg:hidden xl:block"
+                                className="block"
                                 aria-label="Previous"
                                 onClick={playPrev}
                             >
@@ -174,7 +177,7 @@ export default function AudioPlayerWithPlaylist() {
                                     />
                                 </svg>
                             </button>
-                            <button type="button" aria-label="Rewind 10 seconds">
+                            <button type="button" aria-label="Rewind 10 seconds" className='hidden md:block'>
                                 <svg width={24} height={24} fill="none">
                                     <path
                                         d="M6.492 16.95c2.861 2.733 7.5 2.733 10.362 0 2.861-2.734 2.861-7.166 0-9.9-2.862-2.733-7.501-2.733-10.362 0A7.096 7.096 0 0 0 5.5 8.226"
@@ -205,7 +208,7 @@ export default function AudioPlayerWithPlaylist() {
                             </svg>
                         </button>
                         <div className="flex-auto flex items-center justify-evenly">
-                            <button type="button" aria-label="Skip 10 seconds" className="">
+                            <button type="button" aria-label="Skip 10 seconds" className="hidden md:block">
                                 <svg width={24} height={24} fill="none">
                                     <path
                                         d="M17.509 16.95c-2.862 2.733-7.501 2.733-10.363 0-2.861-2.734-2.861-7.166 0-9.9 2.862-2.733 7.501-2.733 10.363 0 .38.365.711.759.991 1.176"
@@ -225,7 +228,7 @@ export default function AudioPlayerWithPlaylist() {
                             </button>
                             <button
                                 type="button"
-                                className="hidden sm:block lg:hidden xl:block"
+                                className="block"
                                 aria-label="Next"
                                 onClick={playNext}
                             >

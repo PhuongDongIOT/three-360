@@ -1,7 +1,6 @@
 
 import { useEffect } from 'react'
-import { useGLTF, useAnimations, Outlines, OrbitControls, Environment } from '@react-three/drei'
-import { useControls } from 'leva'
+import { useGLTF, useAnimations, Outlines } from '@react-three/drei'
 
 export function Model({ outlines, ...props }) {
   const { nodes, materials, animations } = useGLTF('/jump-transformed.glb')

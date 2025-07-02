@@ -8,7 +8,7 @@ function Model({ path, scale = 1 }) {
   return <primitive object={scene} scale={scale} />
 }
 
-export default function GLBViewer({ path = '/model.glb', scale = 1 }) {
+export default function GLBViewer({ path = '/model.glb', scale = 0.08 }) {
   return (
     <div style={{ width: '100%', height: '100vh' }}>
       <Canvas camera={{ position: [2, 2, 2], fov: 45 }}>

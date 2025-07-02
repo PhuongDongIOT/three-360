@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react"
 // import { Pannellum } from 'pannellum-react'
 import ApartmentType from "./apartment-type"
 import ApartmentDetailCard from './apartment-detail-card'
+import { AdaptiveDpr, AdaptiveEvents, CameraControls, OrbitControls } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import PanoramaWithTransition from './panorama-with-transition'
 
 const list = ['/rooms/Phòng khách - bếp (4).png', '/rooms/Phòng khách - bếp (3).png', '/rooms/Phòng khách - bếp (5).png', '/rooms/Phòng ngủ 1 (2).png', '/rooms/Phòng ngủ Master (3).png']
 
@@ -14,6 +17,7 @@ export default function GalleryWithPreviewRoom() {
     const [isPano, setIsPano] = useState(false)
     const [isInfo, setIsInfo] = useState(false)
     const [isVideo, setIsVideo] = useState(false)
+    const [currentImage, setCurrentImage] = useState('/assets/pano.jpg');
 
     const togglePlay = (isBool) => {
         setIsVideo(isBool)
@@ -93,11 +97,11 @@ export default function GalleryWithPreviewRoom() {
             </div>
             <div className="col-span-3">
                 {isPremise ? <div className="relative">
-                    <div className="absolute top-0 left-0 px-8 py-4">
+                    <div className="md:absolute top-0 left-0 px-8 py-4">
                         <img
                             src="/rooms/Mặt bằng căn hộ loại C-Photoroom.png"
                             alt="Mặt bằng căn hộ"
-                            className="img-3d-transparent h-[400px] w-auto"
+                            className="img-3d-transparent h-[200px] md:h-[300px] w-auto mx-auto"
                         />
                     </div>
                     <div className="absolute bottom-0">
@@ -106,22 +110,27 @@ export default function GalleryWithPreviewRoom() {
                     <img
                         src='/rooms/1. Căn hộ loại A - 52m2 - 1PN_1WC.png'
                         alt={`Slide `}
-                        className="w-full h-[500px] object-cover"
+                        className="w-full h-[250px] md:h-[500px] object-cover"
                     />
                 </div> : null}
                 {
                     isImage ? <CarouselWithEffect images={list} className={'h-[500px]'} /> : null
                 }
-                {/* {isPano ? <Pannellum
-                    width="100%"
-                    height="500px"
-                    image="/assets/pano.jpg"
-                    pitch={10}
-                    yaw={180}
-                    hfov={110}
-                    autoLoad
-                    showZoomCtrl={false}
-                /> : null} */}
+                {isPano ? <Canvas>
+                    <AdaptiveDpr pixelated />
+                    <AdaptiveEvents />
+                    <ambientLight intensity={Math.PI / 2} />
+                    <directionalLight
+                        position={[10, 10, 5]}
+                        intensity={1.5}
+                        castShadow
+                        shadow-mapSize-width={1024}
+                        shadow-mapSize-height={1024}
+                    />
+                    <PanoramaWithTransition image={currentImage} />
+                    <CameraControls minDistance={5} maxDistance={500} />
+                    <OrbitControls />
+                </Canvas> : null}
                 {isInfo ? <ApartmentDetailCard /> : null}
                 {isVideo ? <video
                     ref={videoRef}

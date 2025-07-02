@@ -48,7 +48,7 @@ export default function VideoEmblaCarousel() {
                 ref={(el) => (videoRefs.current[index] = el)}
                 className="w-full h-full object-cover rounded-xl"
                 src="/video.mp4"
-                // muted
+                muted
                 loop
                 playsInline
               />

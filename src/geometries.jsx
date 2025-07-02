@@ -18,7 +18,7 @@ const geometries = [
 ]
 
 export function Geometries() {
-  const n = 60;
+  const n = 20;
   const randProps = useMemo(() => Array.from({ length: n }, () => geometries[Math.floor(Math.random() * geometries.length)]), [])
   return randProps.map((prop, index) => {
     const color = new THREE.Color(`hsl(${Math.random() * 360}, 80%, 60%)`)
